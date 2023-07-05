@@ -44,384 +44,117 @@
     (func $runtime.getSingleClosureArg (type $runtime.getSingleClosureArg)))
   (import "runtime" "addToArgArray" (func $runtime.addToArgArray (type $runtime.addToArgArray)))
 
-  (elem declare func $ordBooleanImpl)
-  (elem declare func $ordBooleanImpl-aux-1)
-  (elem declare func $ordBooleanImpl-aux-2)
-  (elem declare func $ordBooleanImpl-aux-3)
-  (elem declare func $ordBooleanImpl-aux-4)
-  (elem declare func $ordIntImpl)
-  (elem declare func $ordIntImpl-aux-1)
-  (elem declare func $ordIntImpl-aux-2)
-  (elem declare func $ordIntImpl-aux-3)
-  (elem declare func $ordIntImpl-aux-4)
-  (elem declare func $ordNumberImpl)
-  (elem declare func $ordNumberImpl-aux-1)
-  (elem declare func $ordNumberImpl-aux-2)
-  (elem declare func $ordNumberImpl-aux-3)
-  (elem declare func $ordNumberImpl-aux-4)
-
-
-  (func $ordIntTest (export "ordIntTest") (param i64 i64) (result i32)
-    ref.func $ordIntImpl
-    array.new_fixed $runtime.closure_arg_array 0
-    struct.new $runtime.closure_top
-
-    i32.const -1
-    i31.new
-    call $runtime.apply
-    ref.cast (ref $runtime.closure_top)
-    i32.const 0
-    i31.new
-    call $runtime.apply
-    ref.cast (ref $runtime.closure_top)
-    i32.const 1
-    i31.new
-    call $runtime.apply
-    ref.cast (ref $runtime.closure_top)
-    
-    local.get 0
-    call $runtime.box-i64
-    call $runtime.apply
-    ref.cast (ref $runtime.closure_top)
-    local.get 1
-    call $runtime.box-i64
-    call $runtime.apply
-    ref.cast i31ref
-    i31.get_s
-  )
-  
-
-  ;; -----------------------------------------
-  ;; boolean
-  
-  (func $ordBooleanImpl (export "ordBooleanImpl") (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordBooleanImpl-aux-1
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
+  (elem declare func $ltIntImpl)
+  (elem declare func $ltIntImpl-aux-1) 
+  (elem declare func $gtIntImpl)
+  (elem declare func $gtIntImpl-aux-1)
+  (elem declare func $ltNumbImpl)
+  (elem declare func $ltNumbImpl-aux-1) 
+  (elem declare func $gtNumbImpl)
+  (elem declare func $gtNumbImpl-aux-1) 
+      
+  (func $ltIntImpl (export "ltIntImpl") (type $runtime.func_top)
+      ref.func $ltIntImpl-aux-1
+      
+      local.get 0
+      struct.get $runtime.closure_top 1
+      local.get 1
+      call $addToArgArray
+      
+      call $runtime.newClosure
   )
 
-  (func $ordBooleanImpl-aux-1 (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordBooleanImpl-aux-2
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordBooleanImpl-aux-2 (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordBooleanImpl-aux-3
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordBooleanImpl-aux-3 (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordBooleanImpl-aux-4
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordBooleanImpl-aux-4 (type $runtime.func_top)
-    (local $x i32)
-    (local $y i32)
-        
-    ;; get arg passed with call and unbox
-    local.get 1
-    ref.cast i31ref
-    i31.get_u
-    local.set $y
-
-    ;; get x: 4th arg in function closure and unbox
-    local.get 0
-    i32.const 0
-    call $runtime.getSingleClosureArg
-    ref.cast i31ref
-    i31.get_u
-    local.tee $x
-    local.get $y
-    i32.lt_s
-
-    (if (result i31ref)
-      (then
-        ;; get LT value
-        local.get 0
-        i32.const 3
-        call $runtime.getSingleClosureArg
-        ref.cast i31ref
-      )
-      (else
-        local.get $x
-        local.get $y
-        i32.eq
-        (if (result i31ref)
-          (then
-            ;; get EQ value
-            local.get 0
-            i32.const 2
-            call $runtime.getSingleClosureArg
-            ref.cast i31ref
-          )
-          (else
-            ;; get GT value
-            local.get 0
-            i32.const 1
-            call $runtime.getSingleClosureArg
-            ref.cast i31ref
-          )
-        )
-      )
-    )
-  )
-
-  ;; -----------------------------------------
-  ;; Int
-  
-  (func $ordIntImpl (export "ordIntImpl") (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordIntImpl-aux-1
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordIntImpl-aux-1 (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordIntImpl-aux-2
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordIntImpl-aux-2 (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordIntImpl-aux-3
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordIntImpl-aux-3 (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordIntImpl-aux-4
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordIntImpl-aux-4 (type $runtime.func_top)
-    
-    (local $x i64)
-    (local $y i64)
-        
-    ;; get arg passed with call and unbox
+  (func $ltIntImpl-aux-1 (type $runtime.func_top)
     local.get 1
     ref.cast (ref $runtime.boxedi64)
     call $runtime.unbox-i64
-    local.set $y
-
-    ;; get x: 4th arg in function closure and unbox
+            
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
     ref.cast (ref $runtime.boxedi64)
     call $runtime.unbox-i64
-    local.tee $x
-    local.get $y
-    i64.lt_s
-
-    (if (result i31ref)
-      (then
-        ;; get LT value
-        local.get 0
-        i32.const 3
-        call $runtime.getSingleClosureArg
-        ref.cast i31ref
-      )
-      (else
-        local.get $x
-        local.get $y
-        i64.eq
-        (if (result i31ref)
-          (then
-            ;; get EQ value
-            local.get 0
-            i32.const 2
-            call $runtime.getSingleClosureArg
-            ref.cast i31ref
-          )
-          (else
-            ;; get GT value
-            local.get 0
-            i32.const 1
-            call $runtime.getSingleClosureArg
-            ref.cast i31ref
-          )
-        )
-      )
-    )
+          
+    i64.lt_u
+    i31.new
   )
 
-  ;; -----------------------------------------
-  ;; number
-  
-  (func $ordNumberImpl (export "ordNumberImpl") (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordNumberImpl-aux-1
-
-    ;; create new closure-args and place result on stack
+  (func $gtIntImpl (export "gtIntImpl") (type $runtime.func_top)
+    ref.func $gtIntImpl-aux-1
+      
     local.get 0
     struct.get $runtime.closure_top 1
     local.get 1
     call $runtime.addToArgArray
-
-    ;; create and return new function closure
+     
     call $runtime.newClosure
   )
 
-  (func $ordNumberImpl-aux-1 (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordNumberImpl-aux-2
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
+  (func $gtIntImpl-aux-1 (type $runtime.func_top)
     local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordNumberImpl-aux-2 (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordNumberImpl-aux-3
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordNumberImpl-aux-3 (type $runtime.func_top)
-    ;; ref to other func on stack
-    ref.func $ordNumberImpl-aux-4
-
-    ;; create new closure-args and place result on stack
-    local.get 0
-    struct.get $runtime.closure_top 1
-    local.get 1
-    call $runtime.addToArgArray
-
-    ;; create and return new function closure
-    call $runtime.newClosure
-  )
-
-  (func $ordNumberImpl-aux-4 (type $runtime.func_top)
-    (local $x f64)
-    (local $y f64)
-        
-    ;; get arg passed with call and unbox
-    local.get 1
-    ref.cast (ref $runtime.boxedf64)
-    call $runtime.unbox-f64
-    local.set $y
-
-    ;; get x: 4th arg in function closure and unbox
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+            
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
-    ref.cast (ref $runtime.boxedf64)
-    call $runtime.unbox-f64
-    local.tee $x
-    local.get $y
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+
+    i64.gt_u
+    i31.new
+  )
+
+  (func $ltNumbImpl (export "ltNumbImpl") (type $runtime.func_top)
+    ref.func $ltNumbImpl-aux-1
+     
+    local.get 0
+    struct.get $runtime.closure_top 1
+    local.get 1
+    call $addToArgArray
+      
+    call $runtime.newClosure
+  )
+
+  (func $ltNumbImpl-aux-1 (type $runtime.func_top)
+    local.get 1
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+          
+    local.get 0
+    i32.const 0
+    call $runtime.getSingleClosureArg
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+           
     f64.lt
+    i31.new
+  )
 
-    (if (result i31ref)
-      (then
-        ;; get LT value
-        local.get 0
-        i32.const 3
-        call $runtime.getSingleClosureArg
-        ref.cast i31ref
-      )
-      (else
-        local.get $x
-        local.get $y
-        f64.eq
-        (if (result i31ref)
-          (then
-            ;; get EQ value
-            local.get 0
-            i32.const 2
-            call $runtime.getSingleClosureArg
-            ref.cast i31ref
-          )
-          (else
-            ;; get GT value
-            local.get 0
-            i32.const 1
-            call $runtime.getSingleClosureArg
-            ref.cast i31ref
-          )
-        )
-      )
-    )
+  (func $gtNumbImpl (export "gtIntImpl") (type $runtime.func_top)
+    ref.func $gtNumbImpl-aux-1
+      
+    local.get 0
+    struct.get $runtime.closure_top 1
+    local.get 1
+    call $runtime.addToArgArray
+     
+    call $runtime.newClosure
+  )
+
+  (func $gtNumbImpl-aux-1 (type $runtime.func_top)
+    local.get 1
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+            
+    local.get 0
+    i32.const 0
+    call $runtime.getSingleClosureArg
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+
+    f64.gt
+    i31.new
   )
 )
+
