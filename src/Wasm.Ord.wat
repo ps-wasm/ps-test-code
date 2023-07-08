@@ -56,7 +56,7 @@
   (elem declare func $eqIntImpl-aux-1)   
   (elem declare func $eqNumbImpl)
   (elem declare func $eqNumbImpl-aux-1)  
-      
+
   (func $ltIntImpl (export "ltIntImpl") (type $runtime.func_top)
       ref.func $ltIntImpl-aux-1
       
@@ -213,9 +213,7 @@
     i31.new
   )
 
-  ;;tests for lesserThan, greaterThan and equal
-
-  ;; ltTest (int)
+   ;; ltTest (int)
 
   (func $ltIntTest (export "ltIntTest") (param i64 i64) (result i32)
     ref.func $ltIntImpl
@@ -236,7 +234,6 @@
   )
   
   ;;ltTest (number)
-
   (func $ltNumbTest (export "ltNumbTest") (param f64 f64) (result i32)
     ref.func $ltNumbImpl
     array.new_fixed $runtime.closure_arg_array 0
@@ -256,7 +253,6 @@
   )
 
   ;; gtTest (int)
-
   (func $gtIntTest (export "gtIntTest") (param i64 i64) (result i32)
     ref.func $gtIntImpl
     array.new_fixed $runtime.closure_arg_array 0
@@ -276,7 +272,6 @@
   )
 
   ;; gtTest (number)
-
   (func $gtNumbTest (export "gtNumbTest") (param f64 f64) (result i32)
     ref.func $gtNumbImpl
     array.new_fixed $runtime.closure_arg_array 0
@@ -296,7 +291,6 @@
   )
 
   ;; eqtest (int)
-
   (func $eqIntTest (export "eqIntTest") (param i64 i64) (result i32)
     ref.func $eqIntImpl
     array.new_fixed $runtime.closure_arg_array 0
@@ -316,7 +310,6 @@
   )
 
   ;; eqtest (number)
-
   (func $eqNumbTest (export "eqNumbTest") (param f64 f64) (result i32)
     ref.func $eqNumbImpl
     array.new_fixed $runtime.closure_arg_array 0
@@ -333,7 +326,5 @@
     call $runtime.apply
     ref.cast i31ref
     i31.get_u
-  )
-)
-
-
+  )  
+)  

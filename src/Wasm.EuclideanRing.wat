@@ -52,35 +52,6 @@
   (elem declare func $numDiv)
   (elem declare func $numDiv-aux-1)
 
-  (func $intDegreeTest (export "intDegreeTest") (param i64) (result i64)
-    ref.func $intDegree
-    array.new_fixed $runtime.closure_arg_array 0
-    struct.new $runtime.closure_top
-    local.get 0
-    call $runtime.box-i64
-    call $runtime.apply
-    ref.cast (ref $runtime.boxedi64)
-    call $runtime.unbox-i64
-  )
-
-  (func $intModTest (export "intModTest") (param i64 i64) (result i64)
-    ref.func $intMod
-    array.new_fixed $runtime.closure_arg_array 0
-    struct.new $runtime.closure_top
-    local.get 0
-    call $runtime.box-i64
-
-    call $runtime.apply
-    ref.cast (ref $runtime.closure_top)
-
-    local.get 1
-    call $runtime.box-i64
-
-    call $runtime.apply
-    ref.cast (ref $runtime.boxedi64)
-    call $runtime.unbox-i64
-  )
-
   (func $intDegree (export "intDegree") (type $runtime.func_top)
     (local $x i64)
 
@@ -195,22 +166,98 @@
     call $runtime.newClosure
   )
 
-  (func $numDiv-aux-1 (type $runtime.func_top)
-    ;; get arg passed with call and unbox
-    local.get 1
-    ref.cast (ref $runtime.boxedf64)
-    call $runtime.unbox-f64
-
+(func $numDiv-aux-1 (type $runtime.func_top)
     ;; get arg present in function closure and unbox
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
     ref.cast (ref $runtime.boxedf64)
     call $runtime.unbox-f64
+    ;;    ref.cast i31ref
+    ;;    i31.get_u
+
+
+    ;; get arg passed with call and unbox
+    local.get 1
+    ref.cast (ref $runtime.boxedf64)
+    call $runtime.unbox-f64
+    ;;ref.cast i31ref
+    ;;i31.get_u
 
     ;; divide and box
     f64.div
     call $runtime.box-f64
+    ;;  i31.new
+  )
+
+;; degreeTest (int)
+  (func $degreeIntTest (export "degreeIntTest") (param i64) (result i64)
+    ref.func $intDegree
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-i64
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+  )
+
+;; modTest (int)
+  (func $modIntTest (export "modIntTest") (param i64 i64) (result i64)
+    ref.func $intMod
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+
+    local.get 1
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+  )
+
+;; divTest (int)
+
+  (func $divIntTest (export "divIntTest") (param i64 i64) (result i64)
+    ref.func $intDiv
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+
+    local.get 1
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+  )
+  
+  ;; divTest (number)
+  (func $divNumbTest (export "divNumbTest") (param f64 f64) (result f64)
+    ref.func $numDiv
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-f64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+
+    local.get 1
+    call $runtime.box-f64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedf64)
+    call $runtime.unbox-f64
   )
 
 )

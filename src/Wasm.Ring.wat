@@ -49,24 +49,6 @@
   (elem declare func $numSub)
   (elem declare func $numSub-aux-1)
 
-  (func $subTest (export "intSubTest") (param i64 i64) (result i64)
-    ref.func $intSub
-    array.new_fixed $runtime.closure_arg_array 0
-    struct.new $runtime.closure_top
-    local.get 0
-    call $runtime.box-i64
-
-    call $runtime.apply
-    ref.cast (ref $runtime.closure_top)
-
-    local.get 1
-    call $runtime.box-i64
-
-    call $runtime.apply
-    ref.cast (ref $runtime.boxedi64)
-    call $runtime.unbox-i64
-  )
-
   (func $intSub (export "intSub") (type $runtime.func_top)
     ;; ref to other func on stack
     ref.func $intSub-aux-1
@@ -96,9 +78,7 @@
     ref.cast (ref $runtime.boxedi64)
     call $runtime.unbox-i64
     ;;ref.cast i31ref
-    ;;i31.get_u
-
-    
+    ;;i31.get_u    
 
     ;; add and box
     i64.sub
@@ -136,5 +116,44 @@
     ;; add and box
     f64.sub
     call $runtime.box-f64
+  )
+
+    ;; subTest (int)
+
+  (func $subIntTest (export "subIntTest") (param i64 i64) (result i64)
+    ref.func $intSub
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+
+    local.get 1
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+  )
+  
+  ;; subTest (number)
+  (func $subNumbTest (export "subNumbTest") (param f64 f64) (result f64)
+    ref.func $numSub
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-f64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+
+    local.get 1
+    call $runtime.box-f64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedf64)
+    call $runtime.unbox-f64
   )
 )

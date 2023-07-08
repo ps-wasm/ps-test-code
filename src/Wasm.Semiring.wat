@@ -43,6 +43,7 @@
   (import "runtime" "getSingleClosureArg"
     (func $runtime.getSingleClosureArg (type $runtime.getSingleClosureArg)))
   (import "runtime" "addToArgArray" (func $runtime.addToArgArray (type $runtime.addToArgArray)))
+  ;;(import "Wasm.Ring" "intSub" (func $Wasm.Ring.intSub))
 
   (elem declare func $intAdd)
   (elem declare func $intAdd-aux-1)
@@ -186,5 +187,82 @@
     ;; multiply and box
     f64.mul
     call $runtime.box-f64
+  )
+
+  ;; addTest (int)
+
+  (func $addIntTest (export "addIntTest") (param i64 i64) (result i64)
+    ref.func $intAdd
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+
+    local.get 1
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+  )
+  
+  ;; addTest (number)
+  (func $addNumbTest (export "addNumbTest") (param f64 f64) (result f64)
+    ref.func $numAdd
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-f64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+
+    local.get 1
+    call $runtime.box-f64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedf64)
+    call $runtime.unbox-f64
+  )
+
+  ;; mulTest (int)
+  (func $mulIntTest (export "mulIntTest") (param i64 i64) (result i64)
+    ref.func $intMul
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+
+    local.get 1
+    call $runtime.box-i64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedi64)
+    call $runtime.unbox-i64
+  )
+
+  ;; mulTest (number)
+  (func $mulNumbTest (export "mulNumbTest") (param f64 f64) (result f64)
+    ref.func $numMul
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 0
+    call $runtime.box-f64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+
+    local.get 1
+    call $runtime.box-f64
+
+    call $runtime.apply
+    ref.cast (ref $runtime.boxedf64)
+    call $runtime.unbox-f64
   )
 )
