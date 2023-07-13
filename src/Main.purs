@@ -2,8 +2,6 @@ module Main
   where
 
 import Wasm.Semiring
-import Wasm.Ring
-import Wasm.EuclideanRing
 
 
 --f :: Int -> Int -> Int
@@ -50,10 +48,12 @@ instance testjeNumber :: TestClass Number where
   testGb = 13.0
   testFn = (*)
 -}
-
+{-
 fact :: Int -> Int
 fact 0 = 1
 fact n = n * fact (n - 1)
+-}
+
 {-
 
 
@@ -85,9 +85,11 @@ sum x = (x * (x+1))/2
 --youKnow = map (\z -> z + 2) m
 
 
---som :: forall a. Semiring a => a -> a -> a
---som x y = x + y
+som :: forall a. Semiring a => a -> a -> a
+som x y = x + y
 
+--t = 4 + 5
+--s x = t + x
 --mapTest :: Array Int -> Array Int
 --mapTest x = map som x
 

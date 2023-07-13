@@ -15,5 +15,5 @@ to generate this file without the comments in this block.
   [ ] : List Text
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs" ]
---, backend = "pswasm-exe"
+, backend = "pswasm-exe"
 }
