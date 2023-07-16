@@ -50,10 +50,10 @@
       ref.func $Wasm.Semiring.numMul
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
-      f32.const 1.0
-      struct.new $runtime.boxedf32
-      f32.const 0.0
-      struct.new $runtime.boxedf32
+      f64.const 1.0
+      struct.new $runtime.boxedf64
+      f64.const 0.0
+      struct.new $runtime.boxedf64
       array.new_fixed $runtime.classDict 4
     )
     (func $Wasm.Semiring.semiringInt (export "Wasm.Semiring.semiringInt") (result (ref eq))
@@ -63,10 +63,10 @@
       ref.func $Wasm.Semiring.intMul
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
-      i32.const 1
-      i31.new
-      i32.const 0
-      i31.new
+      i64.const 1
+      struct.new $runtime.boxedi64
+      i64.const 0
+      struct.new $runtime.boxedi64
       array.new_fixed $runtime.classDict 4
     )
     
@@ -138,15 +138,15 @@
       local.get 1
       call $runtime.apply
       ref.cast (ref $runtime.closure_top)
-      i32.const 0
-      i31.new
+      i64.const 0
+      struct.new $runtime.boxedi64
       call $runtime.apply
       ref.cast (ref i31)
       i31.get_s
       (if (result (ref null eq))
         (then
-          i32.const 0
-          i31.new
+          i64.const 0
+          struct.new $runtime.boxedi64
         )
         (else
           local.get 0
@@ -157,8 +157,8 @@
           local.get 1
           call $runtime.apply
           ref.cast (ref $runtime.closure_top)
-          i32.const 2
-          i31.new
+          i64.const 2
+          struct.new $runtime.boxedi64
           call $runtime.apply
         )
       )

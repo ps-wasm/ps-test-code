@@ -2,6 +2,7 @@ module Main
   where
 
 import Wasm.Semiring
+import Wasm.Eq
 
 
 --f :: Int -> Int -> Int
@@ -85,8 +86,13 @@ sum x = (x * (x+1))/2
 --youKnow = map (\z -> z + 2) m
 
 
-som :: forall a. Semiring a => a -> a -> a
-som x y = x + y
+--som :: forall a. Semiring a => a -> a -> a
+--som x y = x + y
+
+plusIets :: Int -> Int
+plusIets x = if (x==0)
+             then 0 
+             else x+2
 
 --t = 4 + 5
 --s x = t + x
