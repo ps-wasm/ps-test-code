@@ -1,8 +1,6 @@
 module Main
   where
 
-import Wasm.Semiring
-import Wasm.Ring
 import Wasm.EuclideanRing
 
 
