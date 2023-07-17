@@ -78,21 +78,16 @@
     call $runtime.getSingleClosureArg
     ref.cast (ref $runtime.boxedi64)
     struct.get $runtime.boxedi64 0
-    ;;    ref.cast i31ref
-    ;;    i31.get_u
 
 
     ;; get arg passed with call and unbox
     local.get 1
     ref.cast (ref $runtime.boxedi64)
     struct.get $runtime.boxedi64 0
-    ;;ref.cast i31ref
-    ;;i31.get_u
 
     ;; divide and box
     i64.div_s
     struct.new $runtime.boxedi64
-    ;;  i31.new
   )
 
   (func $intMod (export "intMod") (type $runtime.func-param-clos)
@@ -147,21 +142,16 @@
     call $runtime.getSingleClosureArg
     ref.cast (ref $runtime.boxedf64)
     struct.get $runtime.boxedf64 0
-    ;;    ref.cast i31ref
-    ;;    i31.get_u
 
 
     ;; get arg passed with call and unbox
     local.get 1
     ref.cast (ref $runtime.boxedf64)
     struct.get $runtime.boxedf64 0
-    ;;ref.cast i31ref
-    ;;i31.get_u
 
     ;; divide and box
     f64.div
     struct.new $runtime.boxedf64
-    ;;  i31.new
   )
 
 ;; degreeTest (int)
@@ -279,22 +269,17 @@
     call $runtime.getSingleClosureArg
     ref.cast (ref $runtime.boxedi64)
     struct.get $runtime.boxedi64 0
-    ;;    ref.cast i31ref
-    ;;    i31.get_u
     
     ;; get arg passed with call and unbox
     local.get 1
     ref.cast (ref $runtime.boxedi64)
     struct.get $runtime.boxedi64 0
-    ;;ref.cast i31ref
-    ;;i31.get_u
 
     
 
     ;; add and box
     i64.sub
     struct.new $runtime.boxedi64
-;;  i31.new
   )
 
   (func $numSub (export "numSub") (type $runtime.func-param-clos)
@@ -345,7 +330,6 @@
 
     ;; create new closure-args and place result on stack
     local.get 0
-    ;;struct.get $runtime.closure_top 1
     local.get 1
     call $runtime.addToArgArray
 
@@ -358,8 +342,6 @@
     local.get 1
     ref.cast (ref $runtime.boxedi64)
     struct.get $runtime.boxedi64 0
-    ;;ref.cast i31ref
-    ;;i31.get_u
 
     ;; get arg present in function closure and unbox
     local.get 0
@@ -367,13 +349,10 @@
     call $runtime.getSingleClosureArg
     ref.cast (ref $runtime.boxedi64)
     struct.get $runtime.boxedi64 0
-;;    ref.cast i31ref
-;;    i31.get_u
 
     ;; add and box
     i64.add
     struct.new $runtime.boxedi64
-;;  i31.new
   )
 
   (func $intMul (export "intMul") (type $runtime.func-param-clos)

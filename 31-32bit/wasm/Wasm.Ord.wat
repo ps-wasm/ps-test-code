@@ -362,7 +362,23 @@
   )
 
   ;; eqtest (int)
-  
+  (func $eqIntTest (export "eqIntTest") (param i32 i32) (result i32)
+    ref.func $eqIntImpl
+    array.new_fixed $runtime.closure_arg_array 0
+    struct.new $runtime.closure_top
+    local.get 1
+    i31.new
+    
+    call $runtime.apply
+    ref.cast (ref $runtime.closure_top)
+    
+    local.get 0
+    i31.new
+    
+    call $runtime.apply
+    ref.cast i31ref
+    i31.get_s
+  )
 
   ;; eqtest (number)
   (func $eqNumbTest (export "eqNumbTest") (param f32 f32) (result i32)
