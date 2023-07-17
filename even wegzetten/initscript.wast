@@ -1,7 +1,0 @@
-(input $runtime "runtime.wat")
-(register "runtime" $runtime)
-(input $Wasm.Semiring "Wasm.Semiring.wat")
-(register "Wasm.Semiring" $Wasm.Semiring)
-(input $Wasm.Eq "Wasm.Eq.wat")
-(register "Wasm.Eq" $Wasm.Eq)
-(input $main "main.wat")
