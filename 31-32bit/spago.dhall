@@ -10,10 +10,10 @@ When creating a new Spago project, you can use
 `spago init --no-comments` or `spago init -C`
 to generate this file without the comments in this block.
 -}
-{ name = "my-project"
+{ name = "PS to Wasm - 31 bit ints, 32 bit floats"
 , dependencies =
   [ ] : List Text
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs" ]
---, backend = "pswasm-exe"
+, backend = "pswasm-3132bit"
 }
