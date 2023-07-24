@@ -123,10 +123,13 @@
       array.new_fixed $runtime.classDict 3
     )
     
+    (elem declare func $Main.sum3-aux-1)
+    (elem declare func $Main.som-aux-1)
     (elem declare func $Wasm.EuclideanRing.negate-aux-1)
     (elem declare func $Wasm.Ord.notEq-aux-1)
     (elem declare func $Wasm.Ord.notEq-aux-2)
-    (elem declare func $Main.plusIets)
+    (elem declare func $Main.sum3)
+    (elem declare func $Main.som)
     (elem declare func $Wasm.EuclideanRing.negate)
     (elem declare func $Wasm.EuclideanRing.add)
     (elem declare func $Wasm.EuclideanRing.degree)
@@ -145,6 +148,8 @@
     (elem declare func $Wasm.Ord.eq2)
     (elem declare func $Main.eq)
     (elem declare func $Main.add)
+    (elem declare func $Main.sub)
+    (elem declare func $Main.greaterThan)
     (elem declare func $Wasm.Ord.eq1)
     
     (elem declare func $runtime.apply)
@@ -170,6 +175,142 @@
     (elem declare func $Wasm.Ord.ltBoolImpl)
     (elem declare func $Wasm.Ord.gtBoolImpl)
     (elem declare func $Wasm.Ord.eqBoolImpl)
+    
+    (func $Main.sum3-aux-1 (type $runtime.func-param-clos)
+      local.get 0
+      local.get 1
+      call $runtime.addToArgArray
+      call $Main.eq
+      ref.cast (ref $runtime.closure_top)
+      local.get 1
+      call $runtime.apply
+      ref.cast (ref $runtime.closure_top)
+      i32.const 0
+      i31.new
+      call $runtime.apply
+      ref.cast (ref i31)
+      i31.get_s
+      (if (result (ref null eq))
+        (then
+          local.get 0
+          i32.const 0
+          call $runtime.getSingleClosureArg
+        )
+        (else
+          local.get 0
+          local.get 1
+          call $runtime.addToArgArray
+          call $Main.add
+          ref.cast (ref $runtime.closure_top)
+          local.get 0
+          local.get 1
+          call $runtime.addToArgArray
+          call $Main.add
+          ref.cast (ref $runtime.closure_top)
+          local.get 0
+          i32.const 0
+          call $runtime.getSingleClosureArg
+          call $runtime.apply
+          ref.cast (ref $runtime.closure_top)
+          local.get 1
+          call $runtime.apply
+          call $runtime.apply
+          ref.cast (ref $runtime.closure_top)
+          ref.func $Main.sum3
+          local.get 0
+          local.get 1
+          call $runtime.addToArgArray
+          call $runtime.newClosure
+          ref.cast (ref $runtime.closure_top)
+          local.get 0
+          i32.const 0
+          call $runtime.getSingleClosureArg
+          call $runtime.apply
+          ref.cast (ref $runtime.closure_top)
+          local.get 0
+          local.get 1
+          call $runtime.addToArgArray
+          call $Main.sub
+          ref.cast (ref $runtime.closure_top)
+          local.get 1
+          call $runtime.apply
+          ref.cast (ref $runtime.closure_top)
+          i32.const 1
+          i31.new
+          call $runtime.apply
+          call $runtime.apply
+          call $runtime.apply
+        )
+      )
+    )
+    
+    (func $Main.som-aux-1 (type $runtime.func-param-clos)
+      local.get 0
+      local.get 1
+      call $runtime.addToArgArray
+      call $Main.greaterThan
+      ref.cast (ref $runtime.closure_top)
+      local.get 1
+      call $runtime.apply
+      ref.cast (ref $runtime.closure_top)
+      i32.const 0
+      i31.new
+      call $runtime.apply
+      ref.cast (ref i31)
+      i31.get_s
+      (if (result (ref null eq))
+        (then
+          local.get 0
+          local.get 1
+          call $runtime.addToArgArray
+          call $Main.add
+          ref.cast (ref $runtime.closure_top)
+          local.get 0
+          local.get 1
+          call $runtime.addToArgArray
+          call $Main.add
+          ref.cast (ref $runtime.closure_top)
+          local.get 0
+          i32.const 0
+          call $runtime.getSingleClosureArg
+          call $runtime.apply
+          ref.cast (ref $runtime.closure_top)
+          local.get 1
+          call $runtime.apply
+          call $runtime.apply
+          ref.cast (ref $runtime.closure_top)
+          ref.func $Main.som
+          local.get 0
+          local.get 1
+          call $runtime.addToArgArray
+          call $runtime.newClosure
+          ref.cast (ref $runtime.closure_top)
+          local.get 0
+          i32.const 0
+          call $runtime.getSingleClosureArg
+          call $runtime.apply
+          ref.cast (ref $runtime.closure_top)
+          local.get 0
+          local.get 1
+          call $runtime.addToArgArray
+          call $Main.sub
+          ref.cast (ref $runtime.closure_top)
+          local.get 1
+          call $runtime.apply
+          ref.cast (ref $runtime.closure_top)
+          i32.const 1
+          i31.new
+          call $runtime.apply
+          call $runtime.apply
+          call $runtime.apply
+        )
+        (else
+          local.get 0
+          i32.const 0
+          call $runtime.getSingleClosureArg
+        )
+      )
+    )
     
     (func $Wasm.EuclideanRing.negate-aux-1 (type $runtime.func-param-clos)
       local.get 0
@@ -220,39 +361,20 @@
       call $runtime.apply  
     )
     
-    (func $Main.plusIets (export "Main.plusIets") (type $runtime.func-param-clos)
+    (func $Main.sum3 (export "Main.sum3") (type $runtime.func-param-clos)
+      ref.func $Main.sum3-aux-1
       local.get 0
       local.get 1
       call $runtime.addToArgArray
-      call $Main.eq
-      ref.cast (ref $runtime.closure_top)
+      call $runtime.newClosure  
+    )
+    
+    (func $Main.som (export "Main.som") (type $runtime.func-param-clos)
+      ref.func $Main.som-aux-1
+      local.get 0
       local.get 1
-      call $runtime.apply
-      ref.cast (ref $runtime.closure_top)
-      i32.const 0
-      i31.new
-      call $runtime.apply
-      ref.cast (ref i31)
-      i31.get_s
-      (if (result (ref null eq))
-        (then
-          i32.const 0
-          i31.new
-        )
-        (else
-          local.get 0
-          local.get 1
-          call $runtime.addToArgArray
-          call $Main.add
-          ref.cast (ref $runtime.closure_top)
-          local.get 1
-          call $runtime.apply
-          ref.cast (ref $runtime.closure_top)
-          i32.const 2
-          i31.new
-          call $runtime.apply
-        )
-      )
+      call $runtime.addToArgArray
+      call $runtime.newClosure  
     )
     
     (func $Wasm.EuclideanRing.negate (type $runtime.func-param-clos)
@@ -396,6 +518,24 @@
       call $runtime.newClosure
       ref.cast (ref $runtime.closure_top)
       call $Wasm.EuclideanRing.euclideanRingInt
+      call $runtime.apply  
+    )
+    
+    (func $Main.sub (type $runtime.func-clos)
+      ref.func $Wasm.EuclideanRing.sub
+      local.get 0
+      call $runtime.newClosure
+      ref.cast (ref $runtime.closure_top)
+      call $Wasm.EuclideanRing.euclideanRingInt
+      call $runtime.apply  
+    )
+    
+    (func $Main.greaterThan (type $runtime.func-clos)
+      ref.func $Wasm.Ord.greaterThan
+      local.get 0
+      call $runtime.newClosure
+      ref.cast (ref $runtime.closure_top)
+      call $Wasm.Ord.ordInt
       call $runtime.apply  
     )
     

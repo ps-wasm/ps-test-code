@@ -53,7 +53,13 @@
 
     i31.new
 
-    ;; why does .js cap off at these values?
+    ;; why does .js cap off at these values? 
+    ;; Probably because of the same reason mentioned in The Art of WebAssembly
+    ;; The reason is that a 32-bit unsigned
+    ;; integer has a maximum value of 4,294,967,295. If you add 1 to that number, the 32-bit integer wraps back around to a value of 0. So if you take
+    ;; the 5,000,000,000 number we passed in and subtract 4,294,967,296,
+    ;; the result is 705,032,704. The lesson is, if you’re dealing with numbers
+    ;; larger than a few billion, you might not be able to work with 32-bit integers. I am not sure if this is the same for i31 types but I think this could be the reason
     ;;9223372036854775807
     ;;2147483647
   )
