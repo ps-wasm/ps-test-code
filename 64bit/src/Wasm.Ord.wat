@@ -50,14 +50,14 @@
       call $runtime.newClosure
   )
 
-  (func $ltIntImpl-aux-1 (type $runtime.func-param-clos)
-    local.get 1
-    ref.cast (ref $runtime.boxedi64)
-    struct.get $runtime.boxedi64 0
-            
+  (func $ltIntImpl-aux-1 (type $runtime.func-param-clos)         
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
+    ref.cast (ref $runtime.boxedi64)
+    struct.get $runtime.boxedi64 0
+
+    local.get 1
     ref.cast (ref $runtime.boxedi64)
     struct.get $runtime.boxedi64 0
           
@@ -75,14 +75,14 @@
     call $runtime.newClosure
   )
 
-  (func $gtIntImpl-aux-1 (type $runtime.func-param-clos)
-    local.get 1
-    ref.cast (ref $runtime.boxedi64)
-    struct.get $runtime.boxedi64 0
-            
+  (func $gtIntImpl-aux-1 (type $runtime.func-param-clos)           
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
+    ref.cast (ref $runtime.boxedi64)
+    struct.get $runtime.boxedi64 0
+
+    local.get 1
     ref.cast (ref $runtime.boxedi64)
     struct.get $runtime.boxedi64 0
 
@@ -100,14 +100,14 @@
     call $runtime.newClosure
   )
 
-  (func $eqIntImpl-aux-1 (type $runtime.func-param-clos)
-    local.get 1
-    ref.cast (ref $runtime.boxedi64)
-    struct.get $runtime.boxedi64 0
-            
+  (func $eqIntImpl-aux-1 (type $runtime.func-param-clos)           
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
+    ref.cast (ref $runtime.boxedi64)
+    struct.get $runtime.boxedi64 0
+
+    local.get 1
     ref.cast (ref $runtime.boxedi64)
     struct.get $runtime.boxedi64 0
           
@@ -125,14 +125,14 @@
     call $runtime.newClosure
   )
 
-  (func $ltNumbImpl-aux-1 (type $runtime.func-param-clos)
-    local.get 1
-    ref.cast (ref $runtime.boxedf64)
-    struct.get $runtime.boxedf64 0
-          
+  (func $ltNumbImpl-aux-1 (type $runtime.func-param-clos)        
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
+    ref.cast (ref $runtime.boxedf64)
+    struct.get $runtime.boxedf64 0
+
+    local.get 1
     ref.cast (ref $runtime.boxedf64)
     struct.get $runtime.boxedf64 0
            
@@ -150,14 +150,14 @@
     call $runtime.newClosure
   )
 
-  (func $gtNumbImpl-aux-1 (type $runtime.func-param-clos)
-    local.get 1
-    ref.cast (ref $runtime.boxedf64)
-    struct.get $runtime.boxedf64 0
-            
+  (func $gtNumbImpl-aux-1 (type $runtime.func-param-clos)            
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
+    ref.cast (ref $runtime.boxedf64)
+    struct.get $runtime.boxedf64 0
+
+    local.get 1
     ref.cast (ref $runtime.boxedf64)
     struct.get $runtime.boxedf64 0
 
@@ -175,14 +175,14 @@
     call $runtime.newClosure
   )
 
-  (func $eqNumbImpl-aux-1 (type $runtime.func-param-clos)
-    local.get 1
-    ref.cast (ref $runtime.boxedf64)
-    struct.get $runtime.boxedf64 0
-            
+  (func $eqNumbImpl-aux-1 (type $runtime.func-param-clos)           
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
+    ref.cast (ref $runtime.boxedf64)
+    struct.get $runtime.boxedf64 0
+
+    local.get 1
     ref.cast (ref $runtime.boxedf64)
     struct.get $runtime.boxedf64 0
           
@@ -205,15 +205,15 @@
   )
 
   (func $ltBoolImpl-aux-1 (type $runtime.func-param-clos)
-    ;; get arg passed with call and unbox
-    local.get 1
-    ref.cast i31ref
-    i31.get_u
-
     ;; get arg present in function closure and unbox
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
+    ref.cast i31ref
+    i31.get_u
+
+    ;; get arg passed with call and unbox
+    local.get 1
     ref.cast i31ref
     i31.get_u
 
@@ -235,15 +235,15 @@
   )
 
   (func $gtBoolImpl-aux-1 (type $runtime.func-param-clos)
-    ;; get arg passed with call and unbox
-    local.get 1
-    ref.cast i31ref
-    i31.get_u
-
     ;; get arg present in function closure and unbox
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
+    ref.cast i31ref
+    i31.get_u
+
+    ;; get arg passed with call and unbox
+    local.get 1
     ref.cast i31ref
     i31.get_u
 
@@ -265,15 +265,15 @@
   )
 
   (func $eqBoolImpl-aux-1 (type $runtime.func-param-clos)
-    ;; get arg passed with call and unbox
-    local.get 1
-    ref.cast i31ref
-    i31.get_u
-
     ;; get arg present in function closure and unbox
     local.get 0
     i32.const 0
     call $runtime.getSingleClosureArg
+    ref.cast i31ref
+    i31.get_u
+
+    ;; get arg passed with call and unbox
+    local.get 1
     ref.cast i31ref
     i31.get_u
 
