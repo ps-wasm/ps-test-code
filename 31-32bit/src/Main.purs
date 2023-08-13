@@ -39,24 +39,6 @@ instance testjeNumber :: TestClass Number where
 -- sum3 :: Int -> Int -> Int
 -- sum3 x y = if y > 0 then (y + (sum3 x ( y - 1))) else 0
 
---tests for lessthan, greaterthan en equal
+fibonacci :: Int -> Int
+fibonacci n = if (n == 0) then 0 else if (n == 1) then 1 else fibonacci (n - 2) + fibonacci (n - 1)
 
--- twoGreaterThanOne :: Int -> Boolean
--- twoGreaterThanOne x = if x > 1 then true else false
-
--- oneLessThanTwo :: Int -> Boolean
--- oneLessThanTwo x = if x < 2 then true else false
-
--- oneEqualOne :: Int -> Boolean
--- oneEqualOne x = if x ==  then true else false
-
--- sum3 :: Int -> Int -> Int
--- sum3 x y = if y == 0 then x else (x + y + sum3 x ( y - 1))
-
--- fibonacci :: Int -> Int
--- fibonacci n = if (n == 0) then 0 else if (n == 1) then 1 else fibonacci (n - 2) + fibonacci (n - 1)
-
--- plusIets :: Int -> Int
--- plusIets x = if (x==0)
---              then 0 
---              else x+2

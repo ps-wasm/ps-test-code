@@ -37,30 +37,12 @@ instance testjeNumber :: TestClass Number where
 -- sum :: Number -> Number
 -- sum x = (x * (x+1.0))/2.0
 
--- sum :: Int -> Int
--- sum x = (x * (x+1))/2
-
 -- sum2 :: Number -> Number
 -- sum2 n = if n == 0.0 then 0.0 else n + sum2 ( n - 1.0)
 
--- sum2 :: Int -> Int
--- sum2 n = if n == 0 then 0 else n + sum2 ( n - 1)
+-- sum3 :: Number -> Number -> Number
+-- sum3 x y = if y == 0.0 then x else (x + y + sum3 x ( y - 1.0))
 
-sum3 :: Number -> Number -> Number
-sum3 x y = if y == 0.0 then x else (x + y + sum3 x ( y - 1.0))
-
--- with start, end and accumelator parameters
--- sum3 :: Int -> Int -> Int
--- sum3 x y = if y == 0 then x else (x + y + sum3 x ( y - 1))
-
--- fibonacci :: Number -> Number
--- fibonacci n = if (n == 0.0) then 0.0 else if (n == 1.0) then 1.0 else fibonacci (n - 2.0) + fibonacci (n - 1.0)
-
--- fibonacci :: Int -> Int
--- fibonacci n = if (n == 0) then 0 else if (n == 1) then 1 else fibonacci (n - 2) + fibonacci (n - 1)
-
--- plusIets :: Int -> Int
--- plusIets x = if (x==0)
---              then 0 
---              else x+2
+fibonacci :: Number -> Number
+fibonacci n = if (n == 0.0) then 0.0 else if (n == 1.0) then 1.0 else fibonacci (n - 2.0) + fibonacci (n - 1.0)
 
