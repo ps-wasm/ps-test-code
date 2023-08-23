@@ -23,11 +23,20 @@ instance testjeNumber :: TestClass Number where
   testFn = (*)
 -}
 
-sum :: Number -> Number
-sum x = (x * (x+1.0))/2.0
+doubleSumWithTC :: forall a. EuclideanRing a => a -> a -> a
+doubleSumWithTC x y = (x * x + x) / y
+
+doubleSumWithTCNumber :: Number -> Number -> Number
+doubleSumWithTCNumber = doubleSumWithTC 
+
+-- sum :: Number -> Number
+-- sum x = (x * (x+1.0))/2.0
 
 -- sum2 :: Number -> Number
 -- sum2 n = if n == 0.0 then 0.0 else n + sum2 ( n - 1.0 )
+
+-- sum3 :: Number -> Number -> Number
+-- sum3 x y = if y == x then x else (y + (sum3 x ( y - 1.0 )))
 
 -- sum3 :: Number -> Number -> Number
 -- sum3 x y = if y > 0.0 then (y + (sum3 x ( y - 1.0))) else 0.0

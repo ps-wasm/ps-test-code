@@ -28,11 +28,20 @@ instance testjeNumber :: TestClass Number where
   testFn = (*)
 -}
 
--- som :: Int -> Int -> Int
--- som x y = x + y
+-- somMetTC :: forall a. EuclideanRing a => a -> a -> a
+-- somMetTC x y = x + y
 
---som :: forall a. Semiring a => a -> a -> a
---som x y = x + y
+-- somNumber :: Number -> Number -> Number
+-- somNumber = somMetTC
+
+-- somGeenTC :: Number -> Number -> Number 
+-- somGeenTC x y = x + y
+
+doubleSumWithTC :: forall a. EuclideanRing a => a -> a -> a
+doubleSumWithTC x y = (x * x + x) / y
+
+doubleSumWithTCNumber :: Number -> Number -> Number
+doubleSumWithTCNumber = doubleSumWithTC 
 
 -- sum :: Number -> Number
 -- sum x = (x * (x+1.0))/2.0
@@ -41,8 +50,11 @@ instance testjeNumber :: TestClass Number where
 -- sum2 n = if n == 0.0 then 0.0 else n + sum2 ( n - 1.0)
 
 -- sum3 :: Number -> Number -> Number
+-- sum3 x y = if y == x then x else (y + (sum3 x ( y - 1.0 )))
+
+-- sum3 :: Number -> Number -> Number
 -- sum3 x y = if y == 0.0 then x else (x + y + sum3 x ( y - 1.0))
 
-fibonacci :: Number -> Number
-fibonacci n = if (n == 0.0) then 0.0 else if (n == 1.0) then 1.0 else fibonacci (n - 2.0) + fibonacci (n - 1.0)
+-- fibonacci :: Number -> Number
+-- fibonacci n = if (n == 0.0) then 0.0 else if (n == 1.0) then 1.0 else fibonacci (n - 2.0) + fibonacci (n - 1.0)
 

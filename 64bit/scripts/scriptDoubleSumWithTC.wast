@@ -7,4 +7,4 @@
 (input $main "main.wat")
 (register "main" $main)
 (input $test "../test/testDoubleSumWithTC.wat")
-(invoke "Test.testDoubleSumWithTC" (i32.const 5) (i32.const 2))
+(invoke "Test.testDoubleSumWithTC" (f64.const 20000) (f64.const 2))

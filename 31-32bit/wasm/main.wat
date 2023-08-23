@@ -123,11 +123,12 @@
       array.new_fixed $runtime.classDict 3
     )
     
-    (elem declare func $Main.sum3-aux-1)
+    (elem declare func $Main.doubleSumWithTC-aux-1)
+    (elem declare func $Main.doubleSumWithTC-aux-2)
     (elem declare func $Wasm.EuclideanRing.negate-aux-1)
     (elem declare func $Wasm.Ord.notEq-aux-1)
     (elem declare func $Wasm.Ord.notEq-aux-2)
-    (elem declare func $Main.sum3)
+    (elem declare func $Main.doubleSumWithTC)
     (elem declare func $Wasm.EuclideanRing.negate)
     (elem declare func $Wasm.EuclideanRing.add)
     (elem declare func $Wasm.EuclideanRing.degree)
@@ -141,12 +142,13 @@
     (elem declare func $Wasm.Ord.eq)
     (elem declare func $Wasm.Ord.greaterThan)
     (elem declare func $Wasm.Ord.lessThan)
+    (elem declare func $Main.div)
+    (elem declare func $Main.add)
+    (elem declare func $Main.mul)
     (elem declare func $Wasm.EuclideanRing.sub1)
     (elem declare func $Wasm.EuclideanRing.zero1)
     (elem declare func $Wasm.Ord.eq2)
-    (elem declare func $Main.greaterThan)
-    (elem declare func $Main.add)
-    (elem declare func $Main.sub)
+    (elem declare func $Main.doubleSumWithTCInt)
     (elem declare func $Wasm.Ord.eq1)
     
     (elem declare func $runtime.apply)
@@ -173,60 +175,49 @@
     (elem declare func $Wasm.Ord.gtBoolImpl)
     (elem declare func $Wasm.Ord.eqBoolImpl)
     
-    (func $Main.sum3-aux-1 (type $runtime.func-param-clos)
+    (func $Main.doubleSumWithTC-aux-1 (type $runtime.func-param-clos)
+      ref.func $Main.doubleSumWithTC-aux-2
       local.get 0
       local.get 1
       call $runtime.addToArgArray
-      call $Main.greaterThan
+      call $runtime.newClosure  
+    )
+    
+    (func $Main.doubleSumWithTC-aux-2 (type $runtime.func-param-clos)
+      local.get 0
+      local.get 1
+      call $runtime.addToArgArray
+      call $Main.div
+      ref.cast (ref $runtime.closure_top)
+      local.get 0
+      local.get 1
+      call $runtime.addToArgArray
+      call $Main.add
+      ref.cast (ref $runtime.closure_top)
+      local.get 0
+      local.get 1
+      call $runtime.addToArgArray
+      call $Main.mul
+      ref.cast (ref $runtime.closure_top)
+      local.get 0
+      i32.const 1
+      call $runtime.getSingleClosureArg
+      call $runtime.apply
+      ref.cast (ref $runtime.closure_top)
+      local.get 0
+      i32.const 1
+      call $runtime.getSingleClosureArg
+      call $runtime.apply
+      call $runtime.apply
+      ref.cast (ref $runtime.closure_top)
+      local.get 0
+      i32.const 1
+      call $runtime.getSingleClosureArg
+      call $runtime.apply
+      call $runtime.apply
       ref.cast (ref $runtime.closure_top)
       local.get 1
-      call $runtime.apply
-      ref.cast (ref $runtime.closure_top)
-      i32.const 0
-      i31.new
-      call $runtime.apply
-      ref.cast (ref i31)
-      i31.get_s
-      (if (result (ref null eq))
-        (then
-          local.get 0
-          local.get 1
-          call $runtime.addToArgArray
-          call $Main.add
-          ref.cast (ref $runtime.closure_top)
-          local.get 1
-          call $runtime.apply
-          ref.cast (ref $runtime.closure_top)
-          ref.func $Main.sum3
-          local.get 0
-          local.get 1
-          call $runtime.addToArgArray
-          call $runtime.newClosure
-          ref.cast (ref $runtime.closure_top)
-          local.get 0
-          i32.const 0
-          call $runtime.getSingleClosureArg
-          call $runtime.apply
-          ref.cast (ref $runtime.closure_top)
-          local.get 0
-          local.get 1
-          call $runtime.addToArgArray
-          call $Main.sub
-          ref.cast (ref $runtime.closure_top)
-          local.get 1
-          call $runtime.apply
-          ref.cast (ref $runtime.closure_top)
-          i32.const 1
-          i31.new
-          call $runtime.apply
-          call $runtime.apply
-          call $runtime.apply
-        )
-        (else
-          i32.const 0
-          i31.new
-        )
-      )
+      call $runtime.apply  
     )
     
     (func $Wasm.EuclideanRing.negate-aux-1 (type $runtime.func-param-clos)
@@ -278,8 +269,8 @@
       call $runtime.apply  
     )
     
-    (func $Main.sum3 (export "Main.sum3") (type $runtime.func-param-clos)
-      ref.func $Main.sum3-aux-1
+    (func $Main.doubleSumWithTC (export "Main.doubleSumWithTC") (type $runtime.func-param-clos)
+      ref.func $Main.doubleSumWithTC-aux-1
       local.get 0
       local.get 1
       call $runtime.addToArgArray
@@ -379,6 +370,39 @@
       array.get $runtime.classDict  
     )
     
+    (func $Main.div (type $runtime.func-clos)
+      ref.func $Wasm.EuclideanRing.div
+      local.get 0
+      call $runtime.newClosure
+      ref.cast (ref $runtime.closure_top)
+      local.get 0
+      i32.const 0
+      call $runtime.getSingleClosureArg
+      call $runtime.apply  
+    )
+    
+    (func $Main.add (type $runtime.func-clos)
+      ref.func $Wasm.EuclideanRing.add
+      local.get 0
+      call $runtime.newClosure
+      ref.cast (ref $runtime.closure_top)
+      local.get 0
+      i32.const 0
+      call $runtime.getSingleClosureArg
+      call $runtime.apply  
+    )
+    
+    (func $Main.mul (type $runtime.func-clos)
+      ref.func $Wasm.EuclideanRing.mul
+      local.get 0
+      call $runtime.newClosure
+      ref.cast (ref $runtime.closure_top)
+      local.get 0
+      i32.const 0
+      call $runtime.getSingleClosureArg
+      call $runtime.apply  
+    )
+    
     (func $Wasm.EuclideanRing.sub1 (type $runtime.func-clos)
       ref.func $Wasm.EuclideanRing.sub
       local.get 0
@@ -412,26 +436,8 @@
       call $runtime.apply  
     )
     
-    (func $Main.greaterThan (type $runtime.func-clos)
-      ref.func $Wasm.Ord.greaterThan
-      local.get 0
-      call $runtime.newClosure
-      ref.cast (ref $runtime.closure_top)
-      call $Wasm.Ord.ordInt
-      call $runtime.apply  
-    )
-    
-    (func $Main.add (type $runtime.func-clos)
-      ref.func $Wasm.EuclideanRing.add
-      local.get 0
-      call $runtime.newClosure
-      ref.cast (ref $runtime.closure_top)
-      call $Wasm.EuclideanRing.euclideanRingInt
-      call $runtime.apply  
-    )
-    
-    (func $Main.sub (type $runtime.func-clos)
-      ref.func $Wasm.EuclideanRing.sub
+    (func $Main.doubleSumWithTCInt (export "Main.doubleSumWithTCInt") (type $runtime.func-clos)
+      ref.func $Main.doubleSumWithTC
       local.get 0
       call $runtime.newClosure
       ref.cast (ref $runtime.closure_top)
