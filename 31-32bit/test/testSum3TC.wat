@@ -19,12 +19,12 @@
     (import "runtime" "getSingleClosureArg" (func $runtime.getSingleClosureArg (type $runtime.getSingleClosureArg)))
     (import "runtime" "newClosure" (func $runtime.newClosure (type $runtime.newClosure)))
     
-    (import "main" "Main.sum3" (func $Main.sum3 (type $runtime.func-param-clos)))
+    (import "main" "Main.sum3TC" (func $Main.sum3TC (type $runtime.func-param-clos)))
 
-    (elem declare func $Main.sum3)
+    (elem declare func $Main.sum3TC)
 
-    (func $Test.testSum3 (export "Test.testSum3") (param i32) (result i32)
-      ref.func $Main.sum3
+    (func $Test.testSum3TC (export "Test.testSum3TC") (param i32) (result i32)
+      ref.func $Main.sum3TC
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
       local.get 0

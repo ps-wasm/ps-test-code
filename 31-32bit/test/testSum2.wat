@@ -23,11 +23,15 @@
 
     (elem declare func $Main.sum2)
 
-    (func $Test.testSum2 (export "Test.testSum2") (param i32) (result i32)
+    (func $Test.testSum2 (export "Test.testSum2") (param i32) (param i32) (result i32)
       ref.func $Main.sum2
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
       local.get 0
+      i31.new
+      call $runtime.apply
+      ref.cast (ref $runtime.closure_top)
+      local.get 1      
       i31.new
       call $runtime.apply
       ref.cast (ref i31)
