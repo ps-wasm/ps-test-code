@@ -39,11 +39,11 @@ instance testjeNumber :: TestClass Number where
 -- somGeenTC :: Int -> Int -> Int 
 -- somGeenTC x y = x + y
 
-doubleSumWithTC :: forall a. EuclideanRing a => a -> a -> a
-doubleSumWithTC x y = (x * x + x) / y
+sumWithTC :: forall a. EuclideanRing a => a -> a -> a
+sumWithTC x y = (x * x + x) / y
 
-doubleSumWithTCInt :: Int -> Int -> Int
-doubleSumWithTCInt = doubleSumWithTC 
+sumWithTCInt :: Int -> Int -> Int
+sumWithTCInt = sumWithTC 
 
 -- sum :: Int -> Int
 -- sum x = (x * (x+1))/2

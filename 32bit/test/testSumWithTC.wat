@@ -20,28 +20,28 @@
     (import "runtime" "getSingleClosureArg" (func $runtime.getSingleClosureArg (type $runtime.getSingleClosureArg)))
     (import "runtime" "newClosure" (func $runtime.newClosure (type $runtime.newClosure)))
     
-    (import "main" "Main.doubleSumWithTC" (func $Main.doubleSumWithTC (type $runtime.func-param-clos)))
+    (import "main" "Main.sumWithTC" (func $Main.sumWithTC (type $runtime.func-param-clos)))
     (import "main" "Wasm.EuclideanRing.euclideanRingNumber" (func $Wasm.EuclideanRing.euclideanRingNumber (type $runtime.const)))
 
 
-    (elem declare func $Main.doubleSumWithTC)
+    (elem declare func $Main.sumWithTC)
     (elem declare func $Wasm.EuclideanRing.euclideanRingNumber)
     
-    (func $Test.testDoubleSumWithTC (export "Test.testDoubleSumWithTC") (param f64) (param f64) (result f64)
-      ref.func $Main.doubleSumWithTC
+    (func $Test.testSumWithTC (export "Test.testSumWithTC") (param f32) (param f32) (result f32)
+      ref.func $Main.sumWithTC
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
       call $Wasm.EuclideanRing.euclideanRingNumber
       call $runtime.apply
       ref.cast (ref $runtime.closure_top)
       local.get 0
-      struct.new $runtime.boxedf64
+      struct.new $runtime.boxedf32
       call $runtime.apply
       ref.cast (ref $runtime.closure_top)
       local.get 1      
-      struct.new $runtime.boxedf64
+      struct.new $runtime.boxedf32
       call $runtime.apply
-      ref.cast (ref $runtime.boxedf64)
-      struct.get $runtime.boxedf64 0   
+      ref.cast (ref $runtime.boxedf32)
+      struct.get $runtime.boxedf32 0   
     )
 )

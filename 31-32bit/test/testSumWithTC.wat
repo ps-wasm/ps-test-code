@@ -20,15 +20,15 @@
     (import "runtime" "getSingleClosureArg" (func $runtime.getSingleClosureArg (type $runtime.getSingleClosureArg)))
     (import "runtime" "newClosure" (func $runtime.newClosure (type $runtime.newClosure)))
     
-    (import "main" "Main.doubleSumWithTC" (func $Main.doubleSumWithTC (type $runtime.func-param-clos)))
+    (import "main" "Main.sumWithTC" (func $Main.sumWithTC (type $runtime.func-param-clos)))
     (import "main" "Wasm.EuclideanRing.euclideanRingInt" (func $Wasm.EuclideanRing.euclideanRingInt (type $runtime.const)))
 
 
-    (elem declare func $Main.doubleSumWithTC)
+    (elem declare func $Main.sumWithTC)
     (elem declare func $Wasm.EuclideanRing.euclideanRingInt)
     
-    (func $Test.testDoubleSumWithTC (export "Test.testDoubleSumWithTC") (param i32) (param i32) (result i32)
-      ref.func $Main.doubleSumWithTC
+    (func $Test.testSumWithTC (export "Test.testSumWithTC") (param i32) (param i32) (result i32)
+      ref.func $Main.sumWithTC
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
       call $Wasm.EuclideanRing.euclideanRingInt

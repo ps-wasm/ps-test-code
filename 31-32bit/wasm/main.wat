@@ -123,12 +123,12 @@
       array.new_fixed $runtime.classDict 3
     )
     
-    (elem declare func $Main.doubleSumWithTC-aux-1)
-    (elem declare func $Main.doubleSumWithTC-aux-2)
+    (elem declare func $Main.sumWithTC-aux-1)
+    (elem declare func $Main.sumWithTC-aux-2)
     (elem declare func $Wasm.EuclideanRing.negate-aux-1)
     (elem declare func $Wasm.Ord.notEq-aux-1)
     (elem declare func $Wasm.Ord.notEq-aux-2)
-    (elem declare func $Main.doubleSumWithTC)
+    (elem declare func $Main.sumWithTC)
     (elem declare func $Wasm.EuclideanRing.negate)
     (elem declare func $Wasm.EuclideanRing.add)
     (elem declare func $Wasm.EuclideanRing.degree)
@@ -148,7 +148,7 @@
     (elem declare func $Wasm.EuclideanRing.sub1)
     (elem declare func $Wasm.EuclideanRing.zero1)
     (elem declare func $Wasm.Ord.eq2)
-    (elem declare func $Main.doubleSumWithTCInt)
+    (elem declare func $Main.sumWithTCInt)
     (elem declare func $Wasm.Ord.eq1)
     
     (elem declare func $runtime.apply)
@@ -175,15 +175,15 @@
     (elem declare func $Wasm.Ord.gtBoolImpl)
     (elem declare func $Wasm.Ord.eqBoolImpl)
     
-    (func $Main.doubleSumWithTC-aux-1 (type $runtime.func-param-clos)
-      ref.func $Main.doubleSumWithTC-aux-2
+    (func $Main.sumWithTC-aux-1 (type $runtime.func-param-clos)
+      ref.func $Main.sumWithTC-aux-2
       local.get 0
       local.get 1
       call $runtime.addToArgArray
       call $runtime.newClosure  
     )
     
-    (func $Main.doubleSumWithTC-aux-2 (type $runtime.func-param-clos)
+    (func $Main.sumWithTC-aux-2 (type $runtime.func-param-clos)
       local.get 0
       local.get 1
       call $runtime.addToArgArray
@@ -269,8 +269,8 @@
       call $runtime.apply  
     )
     
-    (func $Main.doubleSumWithTC (export "Main.doubleSumWithTC") (type $runtime.func-param-clos)
-      ref.func $Main.doubleSumWithTC-aux-1
+    (func $Main.sumWithTC (export "Main.sumWithTC") (type $runtime.func-param-clos)
+      ref.func $Main.sumWithTC-aux-1
       local.get 0
       local.get 1
       call $runtime.addToArgArray
@@ -436,8 +436,8 @@
       call $runtime.apply  
     )
     
-    (func $Main.doubleSumWithTCInt (export "Main.doubleSumWithTCInt") (type $runtime.func-clos)
-      ref.func $Main.doubleSumWithTC
+    (func $Main.sumWithTCInt (export "Main.sumWithTCInt") (type $runtime.func-clos)
+      ref.func $Main.sumWithTC
       local.get 0
       call $runtime.newClosure
       ref.cast (ref $runtime.closure_top)
