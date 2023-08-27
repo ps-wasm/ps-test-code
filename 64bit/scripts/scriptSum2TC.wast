@@ -6,5 +6,5 @@
 (register "Wasm.Ord" $Wasm.Ord)
 (input $main "main.wat")
 (register "main" $main)
-(input $test "../test/testSum.wat")
-(invoke "Test.testSum" (f64.const 125))
+(input $test "../test/testSum2TC.wat")
+(invoke "Test.testSum2TC" (f64.const 0) (f64.const 125))

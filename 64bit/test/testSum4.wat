@@ -13,34 +13,28 @@
     (type $runtime.getSingleClosureArg (func (param (ref $runtime.closure_arg_array))(param i32)(result (ref null eq))))
     (type $runtime.func-param-clos (func (param (ref $runtime.closure_arg_array))(param (ref null eq))(result (ref null eq))))
     (type $runtime.func-clos (func (param (ref $runtime.closure_arg_array))(result (ref null eq))))
-    (type $runtime.const (func (result (ref eq))))
     
     (import "runtime" "apply" (func $runtime.apply (type $runtime.apply)))
     (import "runtime" "addToArgArray" (func $runtime.addToArgArray (type $runtime.addToArgArray)))
     (import "runtime" "getSingleClosureArg" (func $runtime.getSingleClosureArg (type $runtime.getSingleClosureArg)))
     (import "runtime" "newClosure" (func $runtime.newClosure (type $runtime.newClosure)))
     
-    (import "main" "Main.sum2TC" (func $Main.sum2TC (type $runtime.func-param-clos)))
-    (import "main" "Wasm.EuclideanRing.euclideanRingInt" (func $Wasm.EuclideanRing.euclideanRingInt (type $runtime.const)))
+    (import "main" "Main.sum4" (func $Main.sum4 (type $runtime.func-param-clos)))
 
-    (elem declare func $Main.sum2TC)
-    (elem declare func $Wasm.EuclideanRing.euclideanRingInt)
+    (elem declare func $Main.sum4)
 
-    (func $Test.testSum2TC (export "Test.testSum2TC") (param i32) (param i32) (result i32)
-      ref.func $Main.sum2TC
+    (func $Test.testSum4 (export "Test.testSum4") (param f64) (param f64) (result f64)
+      ref.func $Main.sum4
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
-      call $Wasm.EuclideanRing.euclideanRingInt
-      call $runtime.apply
-      ref.cast (ref $runtime.closure_top)
       local.get 0
-      i31.new
+      struct.new $runtime.boxedf64
       call $runtime.apply
       ref.cast (ref $runtime.closure_top)
-      local.get 1      
-      i31.new
+      local.get 1
+      struct.new $runtime.boxedf64
       call $runtime.apply
-      ref.cast (ref i31)
-      i31.get_s   
+      ref.cast (ref $runtime.boxedf64)
+      struct.get $runtime.boxedf64 0
     )
 )

@@ -13,6 +13,7 @@
     (type $runtime.getSingleClosureArg (func (param (ref $runtime.closure_arg_array))(param i32)(result (ref null eq))))
     (type $runtime.func-param-clos (func (param (ref $runtime.closure_arg_array))(param (ref null eq))(result (ref null eq))))
     (type $runtime.func-clos (func (param (ref $runtime.closure_arg_array))(result (ref null eq))))
+    (type $runtime.const (func (result (ref eq))))
     
     (import "runtime" "apply" (func $runtime.apply (type $runtime.apply)))
     (import "runtime" "addToArgArray" (func $runtime.addToArgArray (type $runtime.addToArgArray)))
@@ -20,13 +21,18 @@
     (import "runtime" "newClosure" (func $runtime.newClosure (type $runtime.newClosure)))
     
     (import "main" "Main.sum4TC" (func $Main.sum4TC (type $runtime.func-param-clos)))
+    (import "main" "Wasm.EuclideanRing.euclideanRingInt" (func $Wasm.EuclideanRing.euclideanRingInt (type $runtime.const)))
 
     (elem declare func $Main.sum4TC)
+    (elem declare func $Wasm.EuclideanRing.euclideanRingInt)
 
     (func $Test.testSum4TC (export "Test.testSum4TC") (param i32) (param i32) (result i32)
       ref.func $Main.sum4TC
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
+      call $Wasm.EuclideanRing.euclideanRingInt
+      call $runtime.apply
+      ref.cast (ref $runtime.closure_top)
       local.get 0
       i31.new
       call $runtime.apply
@@ -35,6 +41,6 @@
       i31.new
       call $runtime.apply
       ref.cast (ref i31)
-      i31.get_s
+      i31.get_s   
     )
 )

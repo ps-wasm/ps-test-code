@@ -13,24 +13,30 @@
     (type $runtime.getSingleClosureArg (func (param (ref $runtime.closure_arg_array))(param i32)(result (ref null eq))))
     (type $runtime.func-param-clos (func (param (ref $runtime.closure_arg_array))(param (ref null eq))(result (ref null eq))))
     (type $runtime.func-clos (func (param (ref $runtime.closure_arg_array))(result (ref null eq))))
+    (type $runtime.const (func (result (ref eq))))
     
     (import "runtime" "apply" (func $runtime.apply (type $runtime.apply)))
     (import "runtime" "addToArgArray" (func $runtime.addToArgArray (type $runtime.addToArgArray)))
     (import "runtime" "getSingleClosureArg" (func $runtime.getSingleClosureArg (type $runtime.getSingleClosureArg)))
     (import "runtime" "newClosure" (func $runtime.newClosure (type $runtime.newClosure)))
     
-    (import "main" "Main.sum" (func $Main.sum (type $runtime.func-param-clos)))
+    (import "main" "Main.sum1TC" (func $Main.sum1TC (type $runtime.func-param-clos)))
+    (import "main" "Wasm.EuclideanRing.euclideanRingNumber" (func $Wasm.EuclideanRing.euclideanRingNumber (type $runtime.const)))
 
-    (elem declare func $Main.sum)
+    (elem declare func $Main.sum1TC)
+    (elem declare func $Wasm.EuclideanRing.euclideanRingNumber)
 
-    (func $Test.testSum (export "Test.testSum") (param f32) (result f32)
-       ref.func $Main.sum
+    (func $Test.testSum1TC (export "Test.testSum1TC") (param f64) (result f64)
+      ref.func $Main.sum1TC
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
-      local.get 0
-      struct.new $runtime.boxedf32
+      call $Wasm.EuclideanRing.euclideanRingNumber
       call $runtime.apply
-      ref.cast (ref $runtime.boxedf32)
-      struct.get $runtime.boxedf32 0
+      ref.cast (ref $runtime.closure_top)
+      local.get 0
+      struct.new $runtime.boxedf64
+      call $runtime.apply
+      ref.cast (ref $runtime.boxedf64)
+      struct.get $runtime.boxedf64 0
     )
 )

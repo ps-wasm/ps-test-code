@@ -7,4 +7,4 @@
 (input $main "main.wat")
 (register "main" $main)
 (input $test "../test/testSum3.wat")
-(invoke "Test.testSum3" (f64.const 0) (f64.const 125))
+(invoke "Test.testSum3" (f64.const 125))

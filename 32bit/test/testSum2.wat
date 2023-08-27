@@ -23,11 +23,15 @@
 
     (elem declare func $Main.sum2)
 
-    (func $Test.testSum2 (export "Test.testSum2") (param f32) (result f32)
+    (func $Test.testSum2 (export "Test.testSum2") (param f32) (param f32) (result f32)
       ref.func $Main.sum2
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
       local.get 0
+      struct.new $runtime.boxedf32
+      call $runtime.apply
+      ref.cast (ref $runtime.closure_top)
+      local.get 1
       struct.new $runtime.boxedf32
       call $runtime.apply
       ref.cast (ref $runtime.boxedf32)

@@ -1,7 +1,7 @@
 module Main
   where
 
-import Wasm.EuclideanRing
+import Wasm.EuclideanRing 
 import Wasm.Ord
 
 
@@ -35,6 +35,7 @@ instance testjeNumber :: TestClass Number where
 -- parameter toevoegen en één keer aanroepen
 -- sum1 :: Int -> Int
 -- sum1 x = (x * (x + 1)) / 2
+
 -- -- kleine invloed
 -- sum2 :: Int -> Int -> Int
 -- sum2 z x = ((z + x) * (x - z + 1)) / 2
@@ -56,11 +57,11 @@ instance testjeNumber :: TestClass Number where
 
 -- ---- polymorfe types ----
 
--- -- parameter toevoeen en één keer aanroepen
--- sum1TC :: EuclideanRing a => a -> a
+-- -- -- parameter toevoeen en één keer aanroepen
+-- sum1TC :: forall a. EuclideanRing a => a -> a
 -- sum1TC x = (x * (x + one)) / (one + one)
 -- -- kleine invloed
--- sum2TC :: EuclideanRing a => a -> a -> a
+-- sum2TC :: forall a. EuclideanRing a => a -> a -> a
 -- sum2TC z x = ((z + x) * (x - z + one)) / (one + one)
 -- --opmerking sum1' =~sum2' zero
 
@@ -68,10 +69,10 @@ instance testjeNumber :: TestClass Number where
 -- -- test1000 = sum2' zero 1000
 
 -- -- parameter toevoegen en elke keer aanroepen
--- sum3TC :: EuclideanRing a => a -> a
+-- sum3TC :: forall a. EuclideanRing a => a -> a
 -- sum3TC x = if x == zero then x else x + sum3TC (x - one)
 -- -- grote invloed
--- sum4TC:: EuclideanRing a => a -> a -> a
+-- sum4TC:: forall a. EuclideanRing a => a -> a -> a
 -- sum4TC z x = if x == z then z else x + sum4TC z (x - one)
 -- -- opmerking
 -- -- sum3' =~ sum4' zero
@@ -79,10 +80,24 @@ instance testjeNumber :: TestClass Number where
 -- -- test1000 = sum3' 1000
 -- -- test1000 = sum4' zero 1000
 
--- sum5TC:: EuclideanRing a => a -> a -> a
+-- sum5TC:: forall a. EuclideanRing a => a -> a -> a
 -- sum5TC x a = if x == zero then a else sum5TC (x - one) (a + x)
 --sum5' niet met sum3', want: extra parameter
 -- verwachting: sum5' sneller dan sum4', want staartrecursie
+
+-- ---- 1 wordt one en 0 wordt zero ----
+
+-- sum2 :: Int -> Int -> Int
+-- sum2 z x = ((z + x) * (x - z + one)) / (one + one)
+
+-- sum4 :: Int -> Int -> Int
+-- sum4 z x = if x == z then z else x + sum4 z (x - one)
+
+-- sum2TC :: forall a. EuclideanRing a => a -> a -> a
+-- sum2TC z x = ((z + x) * (x - z + 1)) / (1 + 1)
+
+-- sum4TC:: forall a. EuclideanRing a => a -> a -> a
+-- sum4TC z x = if x == z then z else x + sum4TC z (x - 1)
 
 ---------------------------------------------------------------------------------------
 ---------------------------------- OLD ------------------------------------------------
