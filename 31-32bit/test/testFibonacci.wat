@@ -31,6 +31,6 @@
       i31.new
       call $runtime.apply
       ref.cast (ref i31)
-      i31.get_s
+      i31.get_s  
     )
 )

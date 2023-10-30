@@ -1,7 +1,8 @@
 module Main
   where
 
-import Wasm.EuclideanRing 
+-- -- import Wasm.EuclideanRing2
+import Wasm.EuclideanRing
 import Wasm.Ord
 
 
@@ -26,17 +27,22 @@ instance testjeNumber :: TestClass Number where
   testGb = 13.0
   testFn = (*)
 -}
----------------------------------------------------------------------------------------
+
+-- add :: Int -> Int -> Int 
+-- add x y = x + y 
+
+
+-- ---------------------------------------------------------------------------------------
 ---------------------------------- NEW ------------------------------------------------
 ---------------------------------------------------------------------------------------
 
 ---- Concrete types ----
 
 -- parameter toevoegen en één keer aanroepen
--- sum1 :: Int -> Int
--- sum1 x = (x * (x + 1)) / 2
+sum1 :: Int -> Int
+sum1 x = (x * (x + 1)) / 2
 
--- -- kleine invloed
+-- -- -- -- kleine invloed
 -- sum2 :: Int -> Int -> Int
 -- sum2 z x = ((z + x) * (x - z + 1)) / 2
 -- -- opmerking 
@@ -45,7 +51,7 @@ instance testjeNumber :: TestClass Number where
 -- -- -- parameter toevoegen en elke keer aanroepen
 -- sum3 :: Int -> Int
 -- sum3 x = if x == 0 then x else x + sum3 (x - 1)
--- -- grote invloed
+-- -- -- grote invloed
 -- sum4 :: Int -> Int -> Int
 -- sum4 z x = if x == z then z else x + sum4 z (x - 1)
 -- -- opmerking
@@ -57,7 +63,7 @@ instance testjeNumber :: TestClass Number where
 
 -- ---- polymorfe types ----
 
--- -- -- parameter toevoeen en één keer aanroepen
+-- -- -- parameter toevoegen en één keer aanroepen
 -- sum1TC :: forall a. EuclideanRing a => a -> a
 -- sum1TC x = (x * (x + one)) / (one + one)
 -- -- kleine invloed
@@ -68,36 +74,22 @@ instance testjeNumber :: TestClass Number where
 -- -- test1000 = sum1' 1000
 -- -- test1000 = sum2' zero 1000
 
--- -- parameter toevoegen en elke keer aanroepen
--- sum3TC :: forall a. EuclideanRing a => a -> a
+-- parameter toevoegen en elke keer aanroepen
+-- sum3TC :: forall a. EuclideanRing2 a => a -> a
 -- sum3TC x = if x == zero then x else x + sum3TC (x - one)
--- -- grote invloed
--- sum4TC:: forall a. EuclideanRing a => a -> a -> a
+-- grote invloed
+-- sum4TC:: forall a. EuclideanRing2 a => a -> a -> a
 -- sum4TC z x = if x == z then z else x + sum4TC z (x - one)
--- -- opmerking
--- -- sum3' =~ sum4' zero
+-- opmerking
+-- sum3' =~ sum4' zero
 
--- -- test1000 = sum3' 1000
--- -- test1000 = sum4' zero 1000
+-- test1000 = sum3' 1000
+-- test1000 = sum4' zero 1000
 
 -- sum5TC:: forall a. EuclideanRing a => a -> a -> a
 -- sum5TC x a = if x == zero then a else sum5TC (x - one) (a + x)
 --sum5' niet met sum3', want: extra parameter
 -- verwachting: sum5' sneller dan sum4', want staartrecursie
-
--- ---- 1 wordt one en 0 wordt zero ----
-
--- sum2 :: Int -> Int -> Int
--- sum2 z x = ((z + x) * (x - z + one)) / (one + one)
-
--- sum4 :: Int -> Int -> Int
--- sum4 z x = if x == z then z else x + sum4 z (x - one)
-
--- sum2TC :: forall a. EuclideanRing a => a -> a -> a
--- sum2TC z x = ((z + x) * (x - z + 1)) / (1 + 1)
-
--- sum4TC:: forall a. EuclideanRing a => a -> a -> a
--- sum4TC z x = if x == z then z else x + sum4TC z (x - 1)
 
 ---------------------------------------------------------------------------------------
 ---------------------------------- OLD ------------------------------------------------
@@ -127,6 +119,9 @@ instance testjeNumber :: TestClass Number where
 -- sum3 :: Int -> Int -> Int
 -- sum3 x y = if y > 0 then (y + (sum3 x ( y - 1))) else 0
 
+-- fibonacci :: forall a. EuclideanRing2 a => a -> a
+-- fibonacci n = if (n == zero) then zero else if (n == one) then one else fibonacci (n - (one + one)) + fibonacci (n - one)
+
 -- fibonacci :: Int -> Int
 -- fibonacci n = if (n == 0) then 0 else if (n == 1) then 1 else fibonacci (n - 2) + fibonacci (n - 1)
 
@@ -136,3 +131,16 @@ instance testjeNumber :: TestClass Number where
 -- sumTestInt :: Int -> Int -> Int
 -- sumTestInt = sumTest
 
+-------------------------------------------------------------------------------------------------------
+------------------------------- probeersel voor one & zero --------------------------------------------
+-------------------------------------------------------------------------------------------------------
+
+-- sum4TC :: forall a. EuclideanRing2 a => a -> a -> a
+-- sum4TC z x = if x == z then z else x + sum4TC z (x - one)
+
+-- make :: forall a. EuclideanRing2 a => Int -> a
+-- make n = if (n == 0) then zero else if (n == 1) then one else one + make (n - 1)
+
+-- make 0 = zero
+-- make 1 = one
+-- make n = one + make (n - 1)

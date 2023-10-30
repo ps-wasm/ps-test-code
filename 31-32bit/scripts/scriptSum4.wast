@@ -7,4 +7,11 @@
 (input $main "main.wat")
 (register "main" $main)
 (input $test "../test/testSum4.wat")
+(invoke "Test.testSum4" (i32.const 0) (i32.const 0))
+(invoke "Test.testSum4" (i32.const 0) (i32.const 25))
+(invoke "Test.testSum4" (i32.const 0) (i32.const 50))
+(invoke "Test.testSum4" (i32.const 0) (i32.const 75))
+(invoke "Test.testSum4" (i32.const 0) (i32.const 100))
 (invoke "Test.testSum4" (i32.const 0) (i32.const 125))
+
+

@@ -13,6 +13,7 @@
     (type $runtime.getSingleClosureArg (func (param (ref $runtime.closure_arg_array))(param i32)(result (ref null eq))))
     (type $runtime.func-param-clos (func (param (ref $runtime.closure_arg_array))(param (ref null eq))(result (ref null eq))))
     (type $runtime.func-clos (func (param (ref $runtime.closure_arg_array))(result (ref null eq))))
+    (type $runtime.const (func (result (ref eq))))
     
     (import "runtime" "apply" (func $runtime.apply (type $runtime.apply)))
     (import "runtime" "addToArgArray" (func $runtime.addToArgArray (type $runtime.addToArgArray)))
@@ -20,8 +21,10 @@
     (import "runtime" "newClosure" (func $runtime.newClosure (type $runtime.newClosure)))
     
     (import "main" "Main.sum2" (func $Main.sum2 (type $runtime.func-param-clos)))
+    (import "main" "Wasm.EuclideanRing.euclideanRingInt" (func $Wasm.EuclideanRing.euclideanRingInt (type $runtime.const)))
 
     (elem declare func $Main.sum2)
+    (elem declare func $Wasm.EuclideanRing.euclideanRingInt)
 
     (func $Test.testSum2 (export "Test.testSum2") (param i32) (param i32) (result i32)
       ref.func $Main.sum2

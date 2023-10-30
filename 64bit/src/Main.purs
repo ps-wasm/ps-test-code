@@ -1,6 +1,7 @@
 module Main
   where
 
+-- import Wasm.EuclideanRing2
 import Wasm.EuclideanRing
 import Wasm.Ord
 
@@ -29,7 +30,7 @@ instance testjeNumber :: TestClass Number where
 
 ---- Concrete types ----
 
--- parameter toevoegen en één keer aanroepen
+-- -- parameter toevoegen en één keer aanroepen
 -- sum1 :: Number -> Number
 -- sum1 x = (x * (x + 1.0)) / 2.0
 -- -- kleine invloed
@@ -65,10 +66,10 @@ instance testjeNumber :: TestClass Number where
 -- -- test1000 = sum2' zero 1000
 
 -- -- parameter toevoegen en elke keer aanroepen
--- sum3TC :: forall a. EuclideanRing a => Ord a => a -> a
+-- sum3TC :: forall a. EuclideanRing2 a =>  a -> a
 -- sum3TC x = if x == zero then x else x + sum3TC (x - one)
 -- -- grote invloed
--- sum4TC:: forall a. EuclideanRing a => a -> a -> a
+-- sum4TC:: forall a. EuclideanRing2 a => a -> a -> a
 -- sum4TC z x = if x == z then z else x + sum4TC z (x - one)
 -- -- opmerking
 -- -- sum3' =~ sum4' zero
@@ -86,8 +87,8 @@ instance testjeNumber :: TestClass Number where
 -- sum2 :: Number -> Number -> Number
 -- sum2 z x = ((z + x) * (x - z + one)) / (one + one)
 
-sum4 :: Number -> Number -> Number
-sum4 z x = if x == z then z else x + sum4 z (x - one)
+-- sum4 :: Number -> Number -> Number
+-- sum4 z x = if x == z then z else x + sum4 z (x - one)
 
 -- sum2TC :: forall a. EuclideanRing a => a -> a -> a
 -- sum2TC z x = ((z + x) * (x - z + 1)) / (1 + 1)
@@ -116,6 +117,10 @@ sum4 z x = if x == z then z else x + sum4 z (x - one)
 
 -- sum3 :: Number -> Number -> Number
 -- sum3 x y = if y > 0.0 then (y + (sum3 x ( y - 1.0))) else 0.0
+
+
+-- fibonacci :: forall a. EuclideanRing2 a => a -> a
+-- fibonacci n = if (n == zero) then zero else if (n == one) then one else fibonacci (n - (one + one)) + fibonacci (n - one)
 
 -- fibonacci :: Number -> Number
 -- fibonacci n = if (n == 0.0) then 0.0 else if (n == 1.0) then 1.0 else fibonacci (n - 2.0) + fibonacci (n - 1.0)

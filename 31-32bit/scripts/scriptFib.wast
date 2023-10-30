@@ -7,4 +7,4 @@
 (input $main "main.wat")
 (register "main" $main)
 (input $test "../test/testFibonacci.wat")
-(invoke "Test.testFibonacci" (i32.const 20))
+(invoke "Test.testFibonacci" (i32.const 18))

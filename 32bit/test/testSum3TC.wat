@@ -21,16 +21,16 @@
     (import "runtime" "newClosure" (func $runtime.newClosure (type $runtime.newClosure)))
     
     (import "main" "Main.sum3TC" (func $Main.sum3TC (type $runtime.func-param-clos)))
-    (import "main" "Wasm.EuclideanRing.euclideanRingNumber" (func $Wasm.EuclideanRing.euclideanRingNumber (type $runtime.const)))
+    (import "main" "Wasm.EuclideanRing2.euclideanRingNumber" (func $Wasm.EuclideanRing2.euclideanRingNumber (type $runtime.const)))
 
     (elem declare func $Main.sum3TC)
-    (elem declare func $Wasm.EuclideanRing.euclideanRingNumber)
+    (elem declare func $Wasm.EuclideanRing2.euclideanRingNumber)
 
     (func $Test.testSum3TC (export "Test.testSum3TC") (param f32) (result f32)
       ref.func $Main.sum3TC
       array.new_fixed $runtime.closure_arg_array 0
       call $runtime.newClosure
-      call $Wasm.EuclideanRing.euclideanRingNumber
+      call $Wasm.EuclideanRing2.euclideanRingNumber
       call $runtime.apply
       ref.cast (ref $runtime.closure_top)
       local.get 0
